@@ -18,15 +18,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 import random
-from math import isclose
 from typing import Optional
 
-from smarts.sstudio.types import MapZone
-from .sumo_road_network import SumoRoadNetwork
-from .scenario import EndlessGoal, LapMission, Mission, Start, default_entry_tactic
-from .waypoints import Waypoints
-from .route import ShortestRoute, EmptyRoute
 from .coordinates import Pose
+from .route import EmptyRoute, ShortestRoute
+from .scenario import EndlessGoal, LapMission, Mission, Start
+from .sumo_road_network import SumoRoadNetwork
+from .waypoints import Waypoints
 
 
 class PlanningError(Exception):
