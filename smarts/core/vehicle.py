@@ -23,23 +23,23 @@ from dataclasses import dataclass
 
 import numpy
 from direct.showbase.ShowBase import ShowBase
-from pybullet_utils.bullet_client import BulletClient
 
 from . import models
-from .chassis import Chassis, AckermannChassis, BoxChassis
+from .chassis import AckermannChassis, BoxChassis, Chassis
 from .colors import SceneColors
 from .coordinates import BoundingBox, Heading, Pose
 from .masks import RenderMasks
 from .sensors import (
     AccelerometerSensor,
-    DrivenPathSensor,
     DrivableAreaGridMapSensor,
+    DrivenPathSensor,
     LidarSensor,
     NeighborhoodVehiclesSensor,
     OGMSensor,
     RGBSensor,
     RoadWaypointsSensor,
     TripMeterSensor,
+    ViaPointSensor,
     WaypointsSensor,
 )
 from .utils.math import rotate_around_point
@@ -431,6 +431,15 @@ class Vehicle:
                     bullet_client=sim.bc,
                     showbase=sim,
                     sensor_params=agent_interface.lidar.sensor_params,
+                )
+            )
+
+        if agent_interface.via_point:
+            vehicle.attach_via_point_sensor(
+                ViaPointSensor(
+                    vehicle=vehicle,
+                    mission_planner=mission_planner,
+                    acquisition_radius=agent_interface.via_point.sensor_range_radius,
                 )
             )
 
