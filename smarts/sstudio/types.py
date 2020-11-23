@@ -352,6 +352,10 @@ class Mission(MissionBase):
 
     route: Route
     """The route for the actor to attempt to follow."""
+
+    via_points: Tuple[ViaPoint, ...] = ()
+    """Points on an edge that an actor must pass through"""
+
     start_time: float = 0.1
     """The earliest simulation time that this mission starts but may start later in couple with
     `entry_tactic`.
@@ -374,6 +378,8 @@ class EndlessMission(MissionBase):
     offset:
         The offset in metres into the lane. Also acceptable\\: 'max', 'random'
     """
+    via_points: Tuple[ViaPoint, ...] = ()
+    """Points on an edge that an actor must pass through"""
     start_time: float = 0.1
     """The earliest simulation time that this mission starts"""
     entry_tactic: EntryTactic = None
@@ -390,6 +396,8 @@ class LapMission(MissionBase):
     """The route for the actor to attempt to follow"""
     num_laps: int
     """The amount of times to repeat the mission"""
+    via_points: Tuple[ViaPoint, ...] = ()
+    """Points on an edge that an actor must pass through"""
     start_time: float = 0.1
     """The earliest simulation time that this mission starts"""
     entry_tactic: EntryTactic = None
@@ -410,6 +418,8 @@ class GroupedLapMission(MissionBase):
     """The number of actors to be part of the group"""
     num_laps: int
     """The amount of times to repeat the mission"""
+    via_points: Tuple[ViaPoint, ...] = ()
+    """Points on an edge that an actor must pass through"""
 
 
 @dataclass(frozen=True)
