@@ -116,7 +116,7 @@ class Mission:
     via: Tuple[str] = field(default_factory=tuple)
     start_time: float = 0.1
     entry_tactic: EntryTactic = None
-    via_points: Tuple[PositionalViaPoint] = ()
+    via_points: Tuple[PositionalViaPoint, ...] = ()
 
     @property
     def has_fixed_route(self):
@@ -552,11 +552,13 @@ class Scenario:
         ) -> Tuple[PositionalViaPoint, ...]:
             return tuple(
                 PositionalViaPoint(
-                    sumo_road_network.world_coord_from_offset(
-                        sumo_road_network.lane_by_offset_on_edge(
-                            via.edge_id, via.lane_offset
-                        ),
-                        via.offset_into_lane,
+                    tuple(
+                        sumo_road_network.world_coord_from_offset(
+                            sumo_road_network.lane_by_offset_on_edge(
+                                via.edge_id, via.lane_offset
+                            ),
+                            via.offset_into_lane,
+                        )
                     ),
                     via.hit_radius,
                 )
