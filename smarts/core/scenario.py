@@ -34,7 +34,7 @@ from typing import Any, Dict, Sequence, Tuple
 import numpy as np
 
 from smarts.sstudio import types as sstudio_types
-from smarts.sstudio.types import EntryTactic
+from smarts.sstudio.types import EntryTactic, ViaPoint
 
 from .coordinates import Heading
 from .data_model import SocialAgent
@@ -110,7 +110,7 @@ class Mission:
     via: Tuple[str] = field(default_factory=tuple)
     start_time: float = 0.1
     entry_tactic: EntryTactic = None
-    via_points = ()
+    via_points: Tuple[ViaPoint] = ()
 
     @property
     def has_fixed_route(self):
@@ -131,7 +131,7 @@ class LapMission:
     via: Tuple[str] = field(default_factory=tuple)
     start_time: float = 0.1
     entry_tactic: EntryTactic = None
-    via_points = ()
+    via_points: Tuple[ViaPoint] = ()
 
     @property
     def has_fixed_route(self):
@@ -558,6 +558,7 @@ class Scenario:
                 goal=goal,
                 start_time=mission.start_time,
                 entry_tactic=mission.entry_tactic,
+                via_points=mission.via_points,
             )
         elif isinstance(mission, sstudio_types.EndlessMission):
             position, heading = to_position_and_heading(*mission.begin, road_network,)
@@ -568,6 +569,7 @@ class Scenario:
                 goal=EndlessGoal(),
                 start_time=mission.start_time,
                 entry_tactic=mission.entry_tactic,
+                via_points=mission.via_points,
             )
         elif isinstance(mission, sstudio_types.LapMission):
             start_edge_id, start_lane, start_edge_offset = mission.route.begin
@@ -599,6 +601,7 @@ class Scenario:
                 route_length=route_length,
                 start_time=mission.start_time,
                 entry_tactic=mission.entry_tactic,
+                via_points=mission.via_points,
             )
 
         raise RuntimeError(
