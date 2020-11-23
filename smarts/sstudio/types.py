@@ -343,7 +343,7 @@ class TrapEntryTactic(EntryTactic):
 
 @dataclass(frozen=True)
 class MissionBase:
-    via_points: Tuple[ViaPoint, ...]
+    pass
 
 
 @dataclass(frozen=True)
