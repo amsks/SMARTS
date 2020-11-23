@@ -110,6 +110,7 @@ class Mission:
     via: Tuple[str] = field(default_factory=tuple)
     start_time: float = 0.1
     entry_tactic: EntryTactic = None
+    via_points = ()
 
     @property
     def has_fixed_route(self):
@@ -130,6 +131,7 @@ class LapMission:
     via: Tuple[str] = field(default_factory=tuple)
     start_time: float = 0.1
     entry_tactic: EntryTactic = None
+    via_points = ()
 
     @property
     def has_fixed_route(self):
